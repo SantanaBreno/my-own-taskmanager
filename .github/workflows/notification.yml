@@ -1,0 +1,30 @@
+name: Noficicação no Discord
+
+on:
+  push:
+    branches:
+        - main
+
+jobs:
+    notify:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout do código 
+              uses: actions/checkout@v2
+
+            - name: Obter mensagem do commit 
+              id: commit 
+              run: |
+                echo "msg=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+                echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+            - name: Enviar notificação para o Discord
+              uses: Ilshidur/action-discord@v2
+              with:
+                 webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+                 username: 'GitHub Actions'
+                 avatar-url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+                 content: |
+                   **Novo commit no repositório!**
+                   - Mensagem: ${{ steps.commit.outputs.msg }}
+                   - SHA: ${{ steps.commit.outputs.sha }}

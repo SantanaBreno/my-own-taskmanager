@@ -19,12 +19,13 @@ jobs:
                 echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
             - name: Enviar notificação para o Discord
-              uses: Ilshidur/action-discord@master
-              with:
-                 webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+              env:
+                 DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
                  username: 'GitHub Actions'
                  avatar-url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-                 content: |
+              uses: Ilshidur/action-discord@master
+              with:
+                 args: |
                    **Novo commit no repositório!**
                    - Mensagem: ${{ steps.commit.outputs.msg }}
                    - SHA: ${{ steps.commit.outputs.sha }}

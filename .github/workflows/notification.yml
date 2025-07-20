@@ -27,5 +27,6 @@ jobs:
               with:
                  args: |
                    **Novo commit no repositório!**
+                   - webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
                    - Mensagem: ${{ steps.commit.outputs.msg }}
                    - SHA: ${{ steps.commit.outputs.sha }}

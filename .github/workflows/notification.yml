@@ -19,7 +19,7 @@ jobs:
                 echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
             - name: Enviar notificação para o Discord
-              uses: Ilshidur/action-discord@v2
+              uses: Ilshidur/action-discord@master
               with:
                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
                  username: 'GitHub Actions'

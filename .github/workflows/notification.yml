@@ -20,7 +20,7 @@ jobs:
 
             - name: Enviar notificação para o Discord
               env:
-                 DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+                 DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
                  username: 'GitHub Actions'
                  avatar-url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
               uses: Ilshidur/action-discord@master
